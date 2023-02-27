@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+         <title> Для НЕРАЗР. КОНТРОЛЯ  </title>
+    <link type="text/css"  href="{{url_for('static', filename='css/style.css')}}" rel="stylesheet"  />
+</head>
+<body>
+<div class="wrapper">
+<h1> Для НЕРАЗР. КОНТРОЛЯ </h1>
+
+    <div class="notice">
+       {%  if (result_import==0) and (result_export==0)   -%} извлеките данные
+        {%  else  -%}
+        {%  endif  -%}
+
+        {%  if (result_import==1) and (result_export==0)   -%}
+        <p class="performed">данные импортированы из Excel-файла  </p>
+     {%  else  -%} {%  endif  -%}
+
+     {%  if  result_export==1  -%}
+            <p class="performed">Данные экспортированы на сайт</p>
+			 <p class="performed">Скорректировано анкет {{ countprod[0]}} </p>
+            <p class="performed">Добавлено анкет   {{ countprod[1]}} </p>
+
+   {%  else  -%} {%  endif  -%}
+
+
+        </div>
+
+
+
+
+
+
+
+ {%  if (result_import==0) and (result_export==0)     -%}
+    <form action="/index" method="post" id="get_from_excel_form" >
+  <h2> ПОЛУЧИТЬ ДАННЫЕ ИЗ EXCEL </h2>
+        <p>  {{ excel_format|safe }} </p>
+         <input type="hidden" name="get_from_excel_button" value="export">
+  <div   >
+      <input type="submit" id="inputexcel" value="ИЗВЛЕЧЬ ИЗ EXCEL">
+  </div>
+
+  <script>
+ document.getElementById("inputexcel").onclick = function() {
+    document.getElementById('inputexcel').value="ВЫПОЛНЯЕТСЯ...";
+    document.getElementById('inputexcel').style.backgroundColor="#a7bcdb";
+    document.getElementById('inputexcel').style.borderColor="#a7bcdb";
+    document.getElementById('inputexcel').style.borderWidth="0";
+  }
+  </script>
+
+
+ </form>
+    {%  else  -%}
+    {%  endif  -%}
+
+
+
+
+ {%  if (result_import==1) and (result_export==0)   -%}
+        <form action="/index" method="post" id="sent_to_db_form" >
+            <h2> ОТПРАВИТЬ СПИСОК АНКЕТ НА САЙТ </h2>
+            <div> <input type="submit"  id="send_to_db_button"  name="send_to_db_button" value="ОТПРАВИТЬ"> </div>
+
+          <script>
+ document.getElementById("send_to_db_button").onclick = function() {
+    document.getElementById('send_to_db_button').value="ВЫПОЛНЯЕТСЯ...";
+    document.getElementById('send_to_db_button').style.backgroundColor="#a7bcdb";
+    document.getElementById('send_to_db_button').style.borderColor="#a7bcdb";
+    document.getElementById('send_to_db_button').style.borderWidth="0";
+  }
+</script>
+
+        </form>
+ {%  else  -%}
+{%  endif  -%}
+
+<br/>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
